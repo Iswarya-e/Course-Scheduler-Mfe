@@ -1,0 +1,31 @@
+<div *ngIf="loading$ | async" class="text-center mt-4">
+  <div class="spinner-border text-primary" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+  <p>Loading bookings...</p>
+</div>
+
+<div *ngIf="error$ | async as error" class="alert alert-danger mt-3">
+  {{ error.message || error }}
+</div>
+
+<div class="container mt-4" *ngIf="(bookings$ | async)?.length; else noBookings">
+  <div class="row row-cols-1 g-3">
+    <div class="col" *ngFor="let booking of bookings$ | async">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title text-primary">{{ booking.courseTitle }}</h5>
+          <p class="card-text mb-1"><strong>Date:</strong> {{ booking.date | date:'mediumDate' }}</p>
+          <p class="card-text"><strong>Time Slot:</strong> {{ booking.startTime }} - {{ booking.endTime }}</p>
+          <button class="btn btn-danger btn-sm" (click)="cancelBooking(booking.id)">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #noBookings>
+  <div class="text-center mt-4">
+    <p class="text-muted">No bookings found.</p>
+  </div>
+</ng-template>

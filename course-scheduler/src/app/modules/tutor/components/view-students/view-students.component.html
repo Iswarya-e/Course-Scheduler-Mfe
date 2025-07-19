@@ -1,0 +1,40 @@
+<div *ngIf="loading$ | async" class="text-center my-4">
+  <div class="spinner-border text-primary" role="status" style="width: 3rem; height: 3rem;">
+    <span class="visually-hidden">Loading students...</span>
+  </div>
+</div>
+
+<div *ngIf="error$ | async as error" class="alert alert-danger my-3" role="alert">
+  <i class="bi bi-exclamation-triangle-fill me-2"></i>
+  {{ error.message || error }}
+</div>
+
+<ul *ngIf="(students$ | async)?.length; else noStudents" class="list-group">
+  <li *ngFor="let student of students$ | async" class="list-group-item mb-3 shadow-sm rounded">
+    <h5 class="text-primary mb-2">
+      <i class="bi bi-person-circle me-2"></i>
+      {{ student.studentDetail.firstName }} {{ student.studentDetail.lastName }}
+    </h5>
+    <div class="row">
+      <div class="col-md-4">
+        <i class="bi bi-envelope-fill me-1 text-secondary"></i>
+        <strong>Email:</strong> {{ student.email }}
+      </div>
+      <div class="col-md-4">
+        <i class="bi bi-telephone-fill me-1 text-secondary"></i>
+        <strong>Contact:</strong> {{ student.studentDetail.contactNo }}
+      </div>
+      <div class="col-md-4">
+        <i class="bi bi-mortarboard-fill me-1 text-secondary"></i>
+        <strong>Grade:</strong> {{ student.studentDetail.grade }}
+      </div>
+    </div>
+  </li>
+</ul>
+
+<ng-template #noStudents>
+  <div class="alert alert-info text-center my-4">
+    <i class="bi bi-info-circle-fill me-2"></i>
+    No students found.
+  </div>
+</ng-template>

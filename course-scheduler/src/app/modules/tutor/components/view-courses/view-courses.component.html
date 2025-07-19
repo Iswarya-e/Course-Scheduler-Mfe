@@ -1,0 +1,6 @@
+<div *ngIf="courses.length > 0" class="list-group">
+  <li *ngFor="let course of courses" class="list-group-item mb-3 rounded shadow-sm">
+    <h5 class="mb-1">{{ course.title }}</h5>
+    <p class="mb-0 text-muted">{{ course.description }}</p>
+  </li>
+</div>

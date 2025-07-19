@@ -1,0 +1,98 @@
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card shadow-sm rounded">
+        <div class="card-header bg-primary text-white">
+          <h4 class="mb-0">Tutor Registration</h4>
+        </div>
+        <div class="card-body">
+          <form [formGroup]="tutorForm" (ngSubmit)="onSubmit()">
+
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label">First Name *</label>
+                <input type="text" class="form-control" formControlName="firstName" placeholder="First Name" />
+                <div class="text-danger small" *ngIf="tutorForm.get('firstName')?.touched && tutorForm.get('firstName')?.invalid">
+                  First name is required.
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label">Last Name *</label>
+                <input type="text" class="form-control" formControlName="lastName" placeholder="Last Name" />
+                <div class="text-danger small" *ngIf="tutorForm.get('lastName')?.touched && tutorForm.get('lastName')?.invalid">
+                  Last name is required.
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label">Email *</label>
+                <input type="email" class="form-control" formControlName="email" placeholder="Email" />
+                <div class="text-danger small" *ngIf="tutorForm.get('email')?.touched && tutorForm.get('email')?.invalid">
+                  <div *ngIf="tutorForm.get('email')?.errors?.['required']">Email is required.</div>
+                  <div *ngIf="tutorForm.get('email')?.errors?.['email']">Please enter a valid email address.</div>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label">Contact Number</label>
+                <input type="text" class="form-control" formControlName="contactNo" placeholder="Contact Number" />
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label">Qualification</label>
+                <input type="text" class="form-control" formControlName="qualification" placeholder="Qualification" />
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label">Expertise Area</label>
+                <input type="text" class="form-control" formControlName="expertiseArea" placeholder="Expertise Area" />
+              </div>
+
+              <div class="col-md-12">
+                <label class="form-label">Bio</label>
+                <textarea class="form-control" formControlName="bio" rows="3" placeholder="Short Bio"></textarea>
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label">Gender</label>
+                <select class="form-select" formControlName="gender">
+                  <option value="" disabled selected>Select Gender</option>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label">Date of Birth</label>
+                <input type="date" class="form-control" formControlName="dob" />
+              </div>
+
+              <div class="col-md-12">
+                <label class="form-label">Address</label>
+                <input type="text" class="form-control" formControlName="address" placeholder="Address" />
+              </div>
+
+              <div class="col-md-12">
+                <label class="form-label">Password *</label>
+                <input type="password" class="form-control" formControlName="password" placeholder="Password" />
+                <div class="text-danger small" *ngIf="tutorForm.get('password')?.touched && tutorForm.get('password')?.invalid">
+                  <div *ngIf="tutorForm.get('password')?.errors?.['required']">Password is required.</div>
+                  <div *ngIf="tutorForm.get('password')?.errors?.['minlength']">
+                    Password must be at least 6 characters.
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-4 text-end">
+              <button type="submit" class="btn btn-success px-4" [disabled]="tutorForm.invalid">Register</button>
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

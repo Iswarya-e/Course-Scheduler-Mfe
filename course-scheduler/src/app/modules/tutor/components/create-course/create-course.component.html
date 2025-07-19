@@ -1,0 +1,29 @@
+<div class="container mt-4" style="max-width: 480px;">
+  <h2 class="mb-4 text-primary">Create New Course</h2>
+
+  <form [formGroup]="courseForm" (ngSubmit)="onSubmit()">
+
+    <div class="mb-3">
+      <label for="title" class="form-label">Title <span class="text-danger">*</span></label>
+      <input id="title" type="text" formControlName="title" class="form-control" [class.is-invalid]="courseForm.get('title')?.invalid && courseForm.get('title')?.touched" />
+      <div *ngIf="courseForm.get('title')?.invalid && courseForm.get('title')?.touched" class="invalid-feedback">
+        Title is required.
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="description" class="form-label">Description</label>
+      <textarea id="description" formControlName="description" class="form-control" rows="4"></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-primary w-100" [disabled]="(loading$ | async) || courseForm.invalid">
+      <span *ngIf="loading$ | async; else label">Creating…</span>
+      <ng-template #label>Create Course</ng-template>
+    </button>
+
+    <div *ngIf="error$ | async as error" class="alert alert-danger mt-3" role="alert">
+      {{ error }}
+    </div>
+
+  </form>
+</div>
