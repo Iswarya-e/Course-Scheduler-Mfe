@@ -135,8 +135,20 @@ export class TutorDetailEffects {
     () =>
       this.actions$.pipe(
         ofType(TutorDetailActions.tutorLoginSuccess),
-        tap(() => {
+        tap(({token}) => {
+          localStorage.setItem('auth_token',token)
           this.router.navigate(['/tutor/']);
+        })
+      ),
+    { dispatch: false }
+  );
+
+    navigateAfterCourseCreation$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(TutorDetailActions.createCourseSuccess),
+        tap(() => {
+          this.router.navigate(['/tutor/view-courses']);
         })
       ),
     { dispatch: false }

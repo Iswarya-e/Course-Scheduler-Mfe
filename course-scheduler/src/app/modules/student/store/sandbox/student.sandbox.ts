@@ -5,6 +5,7 @@ import * as StudentSelectors from '../student.state';
 import { BookingDto, LoginDto, RegisterStudentDto, StudentDetail, TimeSlot } from '../../models/studet-details.model';
 import { Observable } from 'rxjs';
 import { Course } from '../../../tutor/models/course.model';
+import { TutorDetail } from '../../../tutor/models/tutor-detail.model';
 
 @Injectable({ providedIn: 'root' })
 export class StudentSandbox {
@@ -12,7 +13,7 @@ export class StudentSandbox {
   bookings$ = this.store.select(StudentSelectors.selectStudentBookings);
   loading$ = this.store.select(StudentSelectors.selectStudentLoading);
   error$ = this.store.select(StudentSelectors.selectStudentError);
-  user$: Observable<StudentDetail | undefined> = this.store.select(StudentSelectors.selectLoggedInuser);
+  user$: Observable<StudentDetail | undefined | TutorDetail> = this.store.select(StudentSelectors.selectLoggedInuser);
   isLoggedIn$: Observable<boolean> = this.store.select(StudentSelectors.selectIsLoggedIn);
   courses$: Observable<Course[]> = this.store.select(StudentSelectors.selectCourses);
   timeSlots$: Observable<TimeSlot[]> = this.store.select(StudentSelectors.selectTimeSlots);

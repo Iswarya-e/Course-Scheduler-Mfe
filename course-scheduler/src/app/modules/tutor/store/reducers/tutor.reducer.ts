@@ -8,7 +8,7 @@ export interface TutorDetailState {
   loading: boolean;
   error: string | null;
   token: string | null;
-  loggedInUser: TutorDetail | undefined;
+  loggedInUser: TutorDetail | StudentDetail | undefined;
   isLoggedIn : boolean
   courses: Course[];
   students: Student[],

@@ -26,6 +26,7 @@ export interface StudentDetail {
   dob: string;  // ISO string
   address: string;
   email: string;
+  token?:string
 }
 export interface LoginDto {
   email: string;

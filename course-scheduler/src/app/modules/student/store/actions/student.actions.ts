@@ -1,6 +1,7 @@
 import { createAction, props } from '@ngrx/store';
 import { RegisterStudentDto, StudentDetail, RetrieveBookingDto, BookingDto, LoginDto, TimeSlot } from '../../models/studet-details.model';
 import { Course } from '../../../tutor/models/course.model';
+import { TutorDetail } from '../../../tutor/models/tutor-detail.model';
 
 // Register
 export const registerStudent = createAction(
@@ -78,7 +79,7 @@ export const loginStudent = createAction(
 
 export const loginStudentSuccess = createAction(
   '[Student] Login Student Success',
-  props<{ user: StudentDetail }>()
+  props<{ token: string; userDetails:StudentDetail | TutorDetail }>()
 );
 
 export const loginStudentFailure = createAction(

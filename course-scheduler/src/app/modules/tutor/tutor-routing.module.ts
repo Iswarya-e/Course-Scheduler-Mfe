@@ -8,12 +8,15 @@ import { CreateCourseComponent } from './components/create-course/create-course.
 import { EditCourseComponent } from './components/edit-course/edit-course.component';
 import { ViewStudentsComponent } from './components/view-students/view-students.component';
 import { ViewCoursesComponent } from './components/view-courses/view-courses.component';
+import { AuthGuard } from '../core/guards/auth.guard';
 
 const routes: Routes = [
   { path: 'register', component: TutorRegistrationComponent }, // ✅ public route
   { path: 'login', component: TutorLoginComponent }, // ✅ public route
   {
     path: '',
+    canActivate: [AuthGuard],  // <--- protect this route
+
     component: TutorDashboardComponent,
     children: [
       { path: 'create-course', component: CreateCourseComponent },

@@ -68,7 +68,7 @@ export const tutorLogin = createAction(
 
 export const tutorLoginSuccess = createAction(
   '[Tutor Login] Login Success',
-  props<{ token: string; userDetails:TutorDetail }>()
+  props<{ token: string; userDetails:TutorDetail | StudentDetail }>()
 );
 
 export const tutorLoginFailure = createAction(

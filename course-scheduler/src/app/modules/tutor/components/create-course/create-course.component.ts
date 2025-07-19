@@ -26,13 +26,11 @@ export class CreateCourseComponent implements OnInit {
       description: ['']
     });
 
-    // when a course is created, redirect back to dashboard or courses list
     
   }
 
   onSubmit(): void {
     if (this.courseForm.invalid) return;
     this.sandbox.createCourse(this.courseForm.value);
-    this.router.navigate(['/tutor/view-courses']); // <-- fix path here
   }
 }

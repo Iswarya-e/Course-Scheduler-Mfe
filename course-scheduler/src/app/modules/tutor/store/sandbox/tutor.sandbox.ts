@@ -16,7 +16,7 @@ export class TutorSandbox {
   tutors$: Observable<TutorDetail[]> = this.store.pipe(select(fromTutorDetailSelectors.selectAllTutors));
   loading$: Observable<boolean> = this.store.pipe(select(fromTutorDetailSelectors.selectLoading));
   error$: Observable<string | null> = this.store.pipe(select(fromTutorDetailSelectors.selectError));
-  loggedInUser$: Observable<TutorDetail | undefined> = this.store.pipe(select(fromTutorDetailSelectors.selectLoggedInuser));
+  loggedInUser$: Observable<TutorDetail | undefined | StudentDetail> = this.store.pipe(select(fromTutorDetailSelectors.selectLoggedInuser));
   isLoggedIn$: Observable<boolean | undefined> = this.store.pipe(select(fromTutorDetailSelectors.selectIsLoggedIn));
   course$: Observable<Course[]> = this.store.select(fromTutorDetailSelectors.selectCourses);
   bookings$: Observable<BookingDetail[]> = this.store.select(fromTutorDetailSelectors.selectBookings);

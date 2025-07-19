@@ -3,6 +3,7 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { BookingDto, LoginDto, RegisterStudentDto, RetrieveBookingDto, StudentDetail, TimeSlot } from "../models/studet-details.model";
 import { Course } from "../../tutor/models/course.model";
+import { LoginResponse } from "../../tutor/models/tutor-login-response";
 
 @Injectable({ providedIn: 'root' })
 export class StudentApiService {
@@ -33,8 +34,8 @@ export class StudentApiService {
   cancelBooking(studentId: number, bookingId: number): Observable<any> {
     return this.http.delete(`${this.baseUrl}/${studentId}/cancel/${bookingId}`);
   }
-  login(data: LoginDto): Observable<StudentDetail> {
-    return this.http.post<StudentDetail>(`${this.authUrl}`, data);
+  login(data: LoginDto): Observable<LoginResponse> {
+    return this.http.post<LoginResponse>(`${this.authUrl}`, data);
   }
   getCourses(): Observable<Course[]> {
     return this.http.get<Course[]>(`${this.baseUrl}/courses`);

@@ -2,6 +2,7 @@ import { createReducer, on } from '@ngrx/store';
 import * as StudentActions from '../actions/student.actions';
 import { RetrieveBookingDto, StudentDetail, TimeSlot } from '../../models/studet-details.model';
 import { Course } from '../../../tutor/models/course.model';
+import { TutorDetail } from '../../../tutor/models/tutor-detail.model';
 
 export interface StudentState {
   profile: StudentDetail | null;
@@ -9,7 +10,7 @@ export interface StudentState {
   loading: boolean;
   error: any;
   isLoggedIn: boolean
-  loggedInUser: StudentDetail| undefined,
+  loggedInUser: StudentDetail| undefined | TutorDetail,
   courses: Course[],
   timeSlots: TimeSlot[]
 }
@@ -68,12 +69,12 @@ export const studentReducer = createReducer(
     loading: true,
     error: null,
   })),
-  on(StudentActions.loginStudentSuccess, (state, { user }) => ({
+  on(StudentActions.loginStudentSuccess, (state, { userDetails }) => ({
     ...state,
-    user,
+    
     loading: false,
     isLoggedIn: true,
-    loggedInUser: user
+    loggedInUser: userDetails
   })),
   on(StudentActions.loginStudentFailure, (state, { error }) => ({
     ...state,

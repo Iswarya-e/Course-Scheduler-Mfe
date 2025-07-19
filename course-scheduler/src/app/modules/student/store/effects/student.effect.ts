@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { act, Actions, createEffect, ofType } from '@ngrx/effects';
 import * as StudentActions from '../actions/student.actions';
 import { catchError, map, mergeMap, of, switchMap, tap } from 'rxjs';
 import { StudentApiService } from '../../services/student-api.service';
@@ -99,8 +99,12 @@ export class StudentEffects {
       ofType(StudentActions.loginStudent),
       switchMap(({ payload }) =>
         this.studentService.login(payload).pipe(
-          map((user) => StudentActions.loginStudentSuccess({ user })),
-          catchError((error) =>
+        map((response) =>
+            StudentActions.loginStudentSuccess({
+              token: response.token,
+              userDetails: response.userDetails,
+            })
+          ),          catchError((error) =>
             of(StudentActions.loginStudentFailure({ error }))
           )
         )
@@ -142,21 +146,35 @@ export class StudentEffects {
       this.actions$.pipe(
         ofType(StudentActions.registerStudentSuccess),
         tap(() => {
-        this.router.navigate(['/student/login']);
+          
+          this.router.navigate(['/student/login']);
         })
       ),
     { dispatch: false }
   );
 
-
-  navigateAfterLOogin$ = createEffect(
+  navigateAfterLogin$ = createEffect(
     () =>
       this.actions$.pipe(
         ofType(StudentActions.loginStudentSuccess),
-        tap(() => {
-        this.router.navigate(['/student/']);
+        tap(({token}) => {
+          localStorage.setItem('auth_token',token)
+          this.router.navigate(['/student/']);
         })
       ),
     { dispatch: false }
   );
+
+  navigateAfterCreateBooking$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(StudentActions.scheduleBookingSuccess),
+        tap(() => {
+          this.router.navigate(['/student/view-student-bookings/']);
+        })
+      ),
+    { dispatch: false }
+  );
+
+
 }
