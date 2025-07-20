@@ -6,6 +6,7 @@ import { CreateBookingComponent } from './components/create-booking/create-booki
 import { ViewStudentBookingComponent } from './components/view-student-booking/view-student-booking.component';
 import { StudentDashboardComponent } from './pages/student-dashboard/student-dashboard.component';
 import { AuthGuard } from '../core/guards/auth.guard';
+import { StudentGuard } from '../core/guards/student-guard.guard';
 
 const routes: Routes = [
   { path: 'register', component: StudentRegistrationComponent },
@@ -13,7 +14,7 @@ const routes: Routes = [
 
   {
     path: '',
-    canActivate: [AuthGuard],
+    canActivate: [StudentGuard],  // Protect this route
     component: StudentDashboardComponent,
     children: [
       { path: '', redirectTo: 'create-booking', pathMatch: 'full' },

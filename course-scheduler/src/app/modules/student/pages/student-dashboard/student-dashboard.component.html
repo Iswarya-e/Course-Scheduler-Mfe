@@ -1,19 +1,43 @@
-<div class="d-flex vh-100">
-  <!-- Sidebar -->
-  <nav class="nav flex-column bg-light p-3" style="width: 220px;">
-    <a routerLink="/student/create-booking" routerLinkActive="active" class="nav-link mb-2" [routerLinkActiveOptions]="{ exact: true }">
-      Create Booking
-    </a>
-    <a routerLink="/student/view-student-bookings" routerLinkActive="active" class="nav-link mb-2" [routerLinkActiveOptions]="{ exact: true }">
-      View My Bookings
-    </a>
-    <a routerLink="/student/profile" routerLinkActive="active" class="nav-link mb-2" [routerLinkActiveOptions]="{ exact: true }">
-      My Profile
-    </a>
-  </nav>
+<div class="d-flex flex-column vh-100">
+  <!-- Header -->
+  <app-header></app-header>
 
-  <!-- Main Content -->
-  <main class="flex-grow-1 p-4 overflow-auto">
-    <router-outlet></router-outlet>
-  </main>
+  <!-- Body: Sidebar + Main Content -->
+  <div class="d-flex flex-grow-1 overflow-hidden">
+    <!-- Sidebar -->
+    <nav class="nav flex-column bg-light p-3 sidebar-fixed">
+      <a
+        routerLink="/student/create-booking"
+        routerLinkActive="active"
+        class="nav-link mb-2"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        Schedule Course
+      </a>
+      <a
+        routerLink="/student/view-student-bookings"
+        routerLinkActive="active"
+        class="nav-link mb-2"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        View My Schedule
+      </a>
+      <a
+        routerLink="/student/profile"
+        routerLinkActive="active"
+        class="nav-link mb-2"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        My Profile
+      </a>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="flex-grow-1 p-4 overflow-auto">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+
+  <!-- Footer -->
+  <app-footer></app-footer>
 </div>

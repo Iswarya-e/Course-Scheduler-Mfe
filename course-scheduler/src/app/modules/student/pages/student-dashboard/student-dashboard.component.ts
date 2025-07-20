@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-student-dashboard',
   templateUrl: './student-dashboard.component.html',
+  styleUrl: './student-dashboard.component.scss',
+
 })
 export class StudentDashboardComponent {
   constructor(private router: Router) {}

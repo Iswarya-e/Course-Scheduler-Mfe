@@ -15,6 +15,7 @@ import { TutorDashboardComponent } from './pages/tutor-dashboard/tutor-dashboard
 import { EditCourseComponent } from './components/edit-course/edit-course.component';
 import { CreateCourseComponent } from './components/create-course/create-course.component';
 import { ViewCoursesComponent } from './components/view-courses/view-courses.component';
+import { SharedModule } from '../../shared/shared.module';
 
 
 @NgModule({
@@ -34,6 +35,7 @@ import { ViewCoursesComponent } from './components/view-courses/view-courses.com
     ReactiveFormsModule, 
     StoreModule.forFeature('tutorDetail', tutorDetailReducer),
     EffectsModule.forFeature([TutorDetailEffects]),
+    SharedModule
   ]
 })
 export class TutorModule { }

@@ -1,0 +1,11 @@
+.bg-gradient-light {
+  background: linear-gradient(135deg, #f7f9fc, #e2e8f0);
+}
+
+.registration-card input:focus,
+.registration-card select:focus,
+.registration-card textarea:focus {
+  box-shadow: 0 0 8px rgba(40, 167, 69, 0.5);
+  border-color: #28a745;
+  outline: none;
+}

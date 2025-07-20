@@ -137,6 +137,7 @@ export class TutorDetailEffects {
         ofType(TutorDetailActions.tutorLoginSuccess),
         tap(({token}) => {
           localStorage.setItem('auth_token',token)
+          localStorage.setItem('userRole', 'tutor'); // or 'student'
           this.router.navigate(['/tutor/']);
         })
       ),

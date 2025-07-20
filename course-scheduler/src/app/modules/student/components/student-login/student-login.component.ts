@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { StudentSandbox } from '../../store/sandbox/student.sandbox';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LoginDto } from '../../models/studet-details.model';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-student-login',
@@ -12,6 +13,8 @@ import { LoginDto } from '../../models/studet-details.model';
 export class StudentLoginComponent {
   loginForm!: FormGroup;
 
+  loading$: Observable<boolean> | undefined;
+  error$: Observable<any> | undefined;
   constructor(
     private fb: FormBuilder,
     private studentSandbox: StudentSandbox,
@@ -20,10 +23,14 @@ export class StudentLoginComponent {
   ) {}
 
   ngOnInit(): void {
+    this.loading$ = this.studentSandbox.loading$;
+    this.error$ = this.studentSandbox.error$;
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
     });
+
+    
 
     this.studentSandbox.isLoggedIn$.subscribe((loggedIn) => {
       if (loggedIn) {

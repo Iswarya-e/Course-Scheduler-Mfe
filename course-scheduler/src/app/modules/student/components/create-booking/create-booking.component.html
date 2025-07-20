@@ -1,49 +1,78 @@
-<div class="container mt-5">
-  <div class="card shadow-sm p-4 mx-auto" style="max-width: 500px;">
-    <h4 class="mb-4 text-primary text-center">Create Booking</h4>
+<div class="container mt-4" style="max-width: 480px;">
+  <div class="card shadow-sm p-4 mx-auto">
+    <h2 class="mb-4 text-primary text-center">Schedule a Course</h2>
 
     <form [formGroup]="bookingForm" (ngSubmit)="onSubmit()">
       <!-- Course Dropdown -->
       <div class="mb-3">
-        <label for="course" class="form-label">Course</label>
-        <select class="form-select" formControlName="courseId" id="course">
-          <option value="" disabled>Select a course</option>
+        <label for="course" class="form-label">Course <span class="text-danger">*</span></label>
+        <select
+          id="course"
+          class="form-select"
+          formControlName="courseId"
+          [class.is-invalid]="bookingForm.get('courseId')?.invalid && bookingForm.get('courseId')?.touched"
+        >
+          <option value="" disabled selected>Select a course</option>
           <option *ngFor="let course of (courses$ | async)" [value]="course.id">
             {{ course.title }}
           </option>
         </select>
-        <div *ngIf="bookingForm.get('courseId')?.touched && bookingForm.get('courseId')?.invalid" class="text-danger small mt-1">
+        <div
+          *ngIf="bookingForm.get('courseId')?.invalid && bookingForm.get('courseId')?.touched"
+          class="invalid-feedback"
+        >
           Please select a course.
         </div>
       </div>
 
       <!-- Date Picker -->
       <div class="mb-3">
-        <label for="date" class="form-label">Date</label>
-        <input type="date" class="form-control" formControlName="date" id="date" />
-        <div *ngIf="bookingForm.get('date')?.touched && bookingForm.get('date')?.invalid" class="text-danger small mt-1">
+        <label for="date" class="form-label">Date <span class="text-danger">*</span></label>
+        <input
+          id="date"
+          type="date"
+          class="form-control"
+          formControlName="date"
+          [class.is-invalid]="bookingForm.get('date')?.invalid && bookingForm.get('date')?.touched"
+        />
+        <div
+          *ngIf="bookingForm.get('date')?.invalid && bookingForm.get('date')?.touched"
+          class="invalid-feedback"
+        >
           Please select a date.
         </div>
       </div>
 
       <!-- Time Slot Dropdown -->
       <div class="mb-4">
-        <label for="timeslot" class="form-label">Time Slot</label>
-        <select class="form-select" formControlName="timeSlotId" id="timeslot">
-          <option value="" disabled>Select a time slot</option>
+        <label for="timeslot" class="form-label">Time Slot <span class="text-danger">*</span></label>
+        <select
+          id="timeslot"
+          class="form-select"
+          formControlName="timeSlotId"
+          [class.is-invalid]="bookingForm.get('timeSlotId')?.invalid && bookingForm.get('timeSlotId')?.touched"
+        >
+          <option value="" disabled selected>Select a time slot</option>
           <option *ngFor="let slot of (timeSlots$ | async)" [value]="slot.id">
             {{ slot.startTime }} - {{ slot.endTime }}
           </option>
         </select>
-        <div *ngIf="bookingForm.get('timeSlotId')?.touched && bookingForm.get('timeSlotId')?.invalid" class="text-danger small mt-1">
+        <div
+          *ngIf="bookingForm.get('timeSlotId')?.invalid && bookingForm.get('timeSlotId')?.touched"
+          class="invalid-feedback"
+        >
           Please select a time slot.
         </div>
       </div>
 
       <!-- Submit Button -->
-      <div class="d-grid">
-        <button type="submit" class="btn btn-success">Book Now</button>
-      </div>
+      <button
+        type="submit"
+        class="btn btn-primary w-100"
+        [disabled]="bookingForm.invalid"
+      >
+        Book Now
+      </button>
     </form>
   </div>
 </div>

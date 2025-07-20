@@ -1,11 +1,25 @@
-<div class="container d-flex justify-content-center align-items-center vh-100">
-  <div class="text-center border rounded shadow p-5 bg-light" style="max-width: 500px; width: 100%;">
-    <h2 class="mb-4">Welcome to <span class="text-primary">ElevateSpark Academy</span>!</h2>
-    <p class="mb-4">Please choose your role to proceed:</p>
+<div class="d-flex flex-column min-vh-100 bg-light">
+  <app-header></app-header>
 
-    <div class="d-grid gap-3">
-      <button class="btn btn-primary btn-lg" (click)="goTo('student')">I am a Student</button>
-      <button class="btn btn-secondary btn-lg" (click)="goTo('tutor')">I am a Tutor</button>
-    </div>
-  </div>
+  <main class="flex-fill d-flex justify-content-center align-items-center">
+    <ng-container *ngIf="!isLoggedIn">
+      <section class="text-center px-3" style="max-width: 480px; width: 100%;">
+        <h2 class="mb-3 fw-bold text-primary">Welcome to ElevateSpark!</h2>
+        <p class="mb-4 text-muted">Please choose your role to proceed:</p>
+
+        <div class="d-grid gap-3" style="max-width: 300px; margin: 0 auto;">
+          <button class="btn btn-primary btn-lg rounded-pill" (click)="goTo('student')">
+            I am a Student
+          </button>
+          <button class="btn btn-outline-secondary btn-lg rounded-pill" (click)="goTo('tutor')">
+            I am a Tutor
+          </button>
+        </div>
+      </section>
+    </ng-container>
+
+    <router-outlet></router-outlet>
+  </main>
+
+  <app-footer></app-footer>
 </div>

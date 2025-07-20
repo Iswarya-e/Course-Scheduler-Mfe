@@ -9,13 +9,14 @@ import { EditCourseComponent } from './components/edit-course/edit-course.compon
 import { ViewStudentsComponent } from './components/view-students/view-students.component';
 import { ViewCoursesComponent } from './components/view-courses/view-courses.component';
 import { AuthGuard } from '../core/guards/auth.guard';
+import { TutorGuard } from '../core/guards/tutor-guard.guard';
 
 const routes: Routes = [
   { path: 'register', component: TutorRegistrationComponent }, // ✅ public route
   { path: 'login', component: TutorLoginComponent }, // ✅ public route
   {
     path: '',
-    canActivate: [AuthGuard],  // <--- protect this route
+    canActivate: [TutorGuard],  // <--- protect this route
 
     component: TutorDashboardComponent,
     children: [

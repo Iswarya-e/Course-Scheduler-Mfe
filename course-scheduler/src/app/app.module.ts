@@ -8,10 +8,17 @@ import { EffectsModule } from '@ngrx/effects';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { TokenInterceptor } from './modules/core/interceptors/token.interceptor';
+import { HeaderComponent } from './shared/header/header.component';
+import { FooterComponent } from './shared/footer/footer.component';
+import { HomeModule } from './modules/home/home.module';
+import { StudentModule } from './modules/student/student.module';
+import { TutorModule } from './modules/tutor/tutor.module';
+import { HomeComponent } from './modules/home/pages/home/home.component';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
@@ -19,10 +26,14 @@ import { TokenInterceptor } from './modules/core/interceptors/token.interceptor'
     StoreModule.forRoot({}, {}),
     EffectsModule.forRoot([]),   
     HttpClientModule,
-    CommonModule
+    CommonModule,
+    HomeModule,
+    TutorModule,
+    StudentModule,
+    SharedModule
   ],
   providers: [
-     {
+    {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
       multi: true

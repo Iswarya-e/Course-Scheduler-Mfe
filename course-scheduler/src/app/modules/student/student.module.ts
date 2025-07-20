@@ -12,6 +12,7 @@ import { StudentLoginComponent } from './components/student-login/student-login.
 import { CreateBookingComponent } from './components/create-booking/create-booking.component';
 import { ViewStudentBookingComponent } from './components/view-student-booking/view-student-booking.component';
 import { StudentDashboardComponent } from './pages/student-dashboard/student-dashboard.component';
+import { SharedModule } from '../../shared/shared.module';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { StudentDashboardComponent } from './pages/student-dashboard/student-das
     StoreModule.forFeature('student', studentReducer),
     EffectsModule.forFeature([StudentEffects]),
     AsyncPipe,
-    DatePipe
+    DatePipe,
+    SharedModule
   ]
 })
 export class StudentModule { }

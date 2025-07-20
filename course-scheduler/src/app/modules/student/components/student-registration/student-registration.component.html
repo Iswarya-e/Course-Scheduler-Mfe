@@ -1,107 +1,173 @@
-<div class="container mt-5">
-  <div class="row justify-content-center">
-    <div class="col-md-8">
-      <div class="card shadow-sm rounded">
-        <div class="card-header bg-primary text-white">
-          <h4 class="mb-0">Student Registration</h4>
+<div class="d-flex flex-column vh-100 justify-content-center align-items-center bg-gradient-light px-3">
+  <div class="registration-card bg-white rounded-4 shadow-lg p-5 border" style="max-width: 700px; width: 100%;">
+    <div class="mb-4 text-center">
+      <h4 class="fw-bold text-primary">Student Registration</h4>
+    </div>
+
+    <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+      <div class="row g-3">
+        <div class="col-md-6">
+          <label for="firstName" class="form-label fw-semibold">First Name</label>
+          <input
+            type="text"
+            id="firstName"
+            formControlName="firstName"
+            class="form-control rounded-pill"
+            placeholder="Enter first name"
+            required
+          />
+          <div class="text-danger small mt-1" *ngIf="registrationForm.get('firstName')?.touched && registrationForm.get('firstName')?.invalid">
+            First name is required.
+          </div>
         </div>
-        <div class="card-body">
-          <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
 
-            <div class="row g-3">
-              <div class="col-md-6">
-                <label class="form-label">First Name</label>
-                <input type="text" class="form-control" formControlName="firstName" />
-                <div class="text-danger small" *ngIf="registrationForm.get('firstName')?.touched && registrationForm.get('firstName')?.invalid">
-                  First name is required.
-                </div>
-              </div>
+        <div class="col-md-6">
+          <label for="lastName" class="form-label fw-semibold">Last Name</label>
+          <input
+            type="text"
+            id="lastName"
+            formControlName="lastName"
+            class="form-control rounded-pill"
+            placeholder="Enter last name"
+            required
+          />
+          <div class="text-danger small mt-1" *ngIf="registrationForm.get('lastName')?.touched && registrationForm.get('lastName')?.invalid">
+            Last name is required.
+          </div>
+        </div>
 
-              <div class="col-md-6">
-                <label class="form-label">Last Name</label>
-                <input type="text" class="form-control" formControlName="lastName" />
-                <div class="text-danger small" *ngIf="registrationForm.get('lastName')?.touched && registrationForm.get('lastName')?.invalid">
-                  Last name is required.
-                </div>
-              </div>
+        <div class="col-md-6">
+          <label for="email" class="form-label fw-semibold">Email</label>
+          <input
+            type="email"
+            id="email"
+            formControlName="email"
+            class="form-control rounded-pill"
+            placeholder="Enter email"
+            required
+          />
+          <div class="text-danger small mt-1" *ngIf="registrationForm.get('email')?.touched && registrationForm.get('email')?.invalid">
+            Valid email is required.
+          </div>
+        </div>
 
-              <div class="col-md-6">
-                <label class="form-label">Email</label>
-                <input type="email" class="form-control" formControlName="email" />
-                <div class="text-danger small" *ngIf="registrationForm.get('email')?.touched && registrationForm.get('email')?.invalid">
-                  Valid email is required.
-                </div>
-              </div>
+        <div class="col-md-6">
+          <label for="password" class="form-label fw-semibold">Password</label>
+          <input
+            type="password"
+            id="password"
+            formControlName="password"
+            class="form-control rounded-pill"
+            placeholder="Enter password"
+            required
+          />
+          <div class="text-danger small mt-1" *ngIf="registrationForm.get('password')?.touched && registrationForm.get('password')?.invalid">
+            Password is required.
+          </div>
+        </div>
 
-              <div class="col-md-6">
-                <label class="form-label">Password</label>
-                <input type="password" class="form-control" formControlName="password" />
-                <div class="text-danger small" *ngIf="registrationForm.get('password')?.touched && registrationForm.get('password')?.invalid">
-                  Password is required.
-                </div>
-              </div>
+        <div class="col-md-6">
+          <label for="schoolName" class="form-label fw-semibold">School Name</label>
+          <input
+            type="text"
+            id="schoolName"
+            formControlName="schoolName"
+            class="form-control rounded-pill"
+            placeholder="Enter school name"
+            required
+          />
+          <div class="text-danger small mt-1" *ngIf="registrationForm.get('schoolName')?.touched && registrationForm.get('schoolName')?.invalid">
+            School name is required.
+          </div>
+        </div>
 
-              <div class="col-md-6">
-                <label class="form-label">School Name</label>
-                <input type="text" class="form-control" formControlName="schoolName" />
-                <div class="text-danger small" *ngIf="registrationForm.get('schoolName')?.touched && registrationForm.get('schoolName')?.invalid">
-                  School name is required.
-                </div>
-              </div>
+        <div class="col-md-6">
+          <label for="contactNo" class="form-label fw-semibold">Contact No</label>
+          <input
+            type="text"
+            id="contactNo"
+            formControlName="contactNo"
+            class="form-control rounded-pill"
+            placeholder="Enter 10-digit contact number"
+            required
+          />
+          <div class="text-danger small mt-1" *ngIf="registrationForm.get('contactNo')?.touched && registrationForm.get('contactNo')?.invalid">
+            Valid 10-digit contact number is required.
+          </div>
+        </div>
 
-              <div class="col-md-6">
-                <label class="form-label">Contact No</label>
-                <input type="text" class="form-control" formControlName="contactNo" />
-                <div class="text-danger small" *ngIf="registrationForm.get('contactNo')?.touched && registrationForm.get('contactNo')?.invalid">
-                  Valid 10-digit contact number is required.
-                </div>
-              </div>
+        <div class="col-md-12">
+          <label for="address" class="form-label fw-semibold">Address</label>
+          <input
+            type="text"
+            id="address"
+            formControlName="address"
+            class="form-control rounded-pill"
+            placeholder="Enter address"
+            required
+          />
+          <div class="text-danger small mt-1" *ngIf="registrationForm.get('address')?.touched && registrationForm.get('address')?.invalid">
+            Address is required.
+          </div>
+        </div>
 
-              <div class="col-md-12">
-                <label class="form-label">Address</label>
-                <input type="text" class="form-control" formControlName="address" />
-                <div class="text-danger small" *ngIf="registrationForm.get('address')?.touched && registrationForm.get('address')?.invalid">
-                  Address is required.
-                </div>
-              </div>
+        <div class="col-md-6">
+          <label for="dateOfBirth" class="form-label fw-semibold">Date of Birth</label>
+          <input
+            type="date"
+            id="dateOfBirth"
+            formControlName="dateOfBirth"
+            class="form-control rounded-pill"
+            required
+          />
+          <div class="text-danger small mt-1" *ngIf="registrationForm.get('dateOfBirth')?.touched && registrationForm.get('dateOfBirth')?.invalid">
+            Date of birth is required.
+          </div>
+        </div>
 
-              <div class="col-md-6">
-                <label class="form-label">Date of Birth</label>
-                <input type="date" class="form-control" formControlName="dateOfBirth" />
-                <div class="text-danger small" *ngIf="registrationForm.get('dateOfBirth')?.touched && registrationForm.get('dateOfBirth')?.invalid">
-                  Date of birth is required.
-                </div>
-              </div>
+        <div class="col-md-6">
+          <label for="grade" class="form-label fw-semibold">Grade</label>
+          <input
+            type="text"
+            id="grade"
+            formControlName="grade"
+            class="form-control rounded-pill"
+            placeholder="Enter grade"
+            required
+          />
+          <div class="text-danger small mt-1" *ngIf="registrationForm.get('grade')?.touched && registrationForm.get('grade')?.invalid">
+            Grade is required.
+          </div>
+        </div>
 
-              <div class="col-md-6">
-                <label class="form-label">Grade</label>
-                <input type="text" class="form-control" formControlName="grade" />
-                <div class="text-danger small" *ngIf="registrationForm.get('grade')?.touched && registrationForm.get('grade')?.invalid">
-                  Grade is required.
-                </div>
-              </div>
-
-              <div class="col-md-6">
-                <label class="form-label">Gender</label>
-                <select class="form-select" formControlName="gender">
-                  <option value="" disabled selected>Select Gender</option>
-                  <option value="Male">Male</option>
-                  <option value="Female">Female</option>
-                  <option value="Other">Other</option>
-                </select>
-                <div class="text-danger small" *ngIf="registrationForm.get('gender')?.touched && registrationForm.get('gender')?.invalid">
-                  Gender is required.
-                </div>
-              </div>
-            </div>
-
-            <div class="mt-4 text-end">
-              <button type="submit" class="btn btn-success px-4" [disabled]="registrationForm.invalid">Register</button>
-            </div>
-
-          </form>
+        <div class="col-md-6">
+          <label for="gender" class="form-label fw-semibold">Gender</label>
+          <select
+            id="gender"
+            class="form-select rounded-pill"
+            formControlName="gender"
+            required
+          >
+            <option value="" disabled selected>Select Gender</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+          </select>
+          <div class="text-danger small mt-1" *ngIf="registrationForm.get('gender')?.touched && registrationForm.get('gender')?.invalid">
+            Gender is required.
+          </div>
         </div>
       </div>
-    </div>
+
+      <div class="mt-4 text-end">
+        <button
+          type="submit"
+          class="btn btn-success px-4 rounded-pill shadow-sm"
+          [disabled]="registrationForm.invalid"
+        >
+          Register
+        </button>
+      </div>
+    </form>
   </div>
 </div>

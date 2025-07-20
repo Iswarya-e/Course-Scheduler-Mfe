@@ -158,7 +158,9 @@ export class StudentEffects {
       this.actions$.pipe(
         ofType(StudentActions.loginStudentSuccess),
         tap(({token}) => {
-          localStorage.setItem('auth_token',token)
+          localStorage.setItem('auth_token',token);
+          localStorage.setItem('userRole', 'student'); // or 'tutor'
+
           this.router.navigate(['/student/']);
         })
       ),
