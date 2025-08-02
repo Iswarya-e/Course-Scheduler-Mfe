@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { TutorRoutingModule } from './tutor-routing.module';
 import { TutorRegistrationComponent } from './components/tutor-registration/tutor-registration.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
 import { tutorDetailReducer } from './store/reducers/tutor.reducer';
 import { EffectsModule } from '@ngrx/effects';
@@ -16,8 +16,6 @@ import { EditCourseComponent } from './components/edit-course/edit-course.compon
 import { CreateCourseComponent } from './components/create-course/create-course.component';
 import { ViewCoursesComponent } from './components/view-courses/view-courses.component';
 import { SharedModule } from '../../shared/shared.module';
-
-
 @NgModule({
   declarations: [
     TutorRegistrationComponent,
@@ -35,7 +33,9 @@ import { SharedModule } from '../../shared/shared.module';
     ReactiveFormsModule, 
     StoreModule.forFeature('tutorDetail', tutorDetailReducer),
     EffectsModule.forFeature([TutorDetailEffects]),
-    SharedModule
+    SharedModule,
+    FormsModule,
+
   ]
 })
 export class TutorModule { }

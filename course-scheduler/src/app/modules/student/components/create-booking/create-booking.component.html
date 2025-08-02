@@ -54,7 +54,7 @@
         >
           <option value="" disabled selected>Select a time slot</option>
           <option *ngFor="let slot of (timeSlots$ | async)" [value]="slot.id">
-            {{ slot.startTime }} - {{ slot.endTime }}
+            {{ slot.startTimeString }}
           </option>
         </select>
         <div

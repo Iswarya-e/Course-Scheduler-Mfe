@@ -8,15 +8,14 @@ export interface RegisterStudentDto {
   grade: string;
   gender: string;
   dob: string;  // ISO string
-  address: string;
   email: string;
   password: string;
+  courseIds: number[]; // Array of course IDs the student is registering for
 }
 
 export interface StudentDetail {
   id?: number;
   userId?: number;
-
   firstName: string;
   lastName: string;
   schoolName: string;
@@ -50,21 +49,22 @@ export interface RetrieveBookingDto {
   date: string;              // ISO date string (e.g., "2025-07-19")
   timeSlotId: number;
   startTime: string;         // "HH:mm" format
-  endTime: string;
   bookedAt: string;          // ISO date-time string
+  startTimeString: string; // e.g. "09:00 AM"
 }
 
 
 export interface TimeSlot {
   id: number;
   startTime: string;  // e.g. "09:00:00"
-  endTime: string;    // e.g. "09:30:00"
+  startTimeString: string; // e.g. "09:00 AM"
 }
 
 export interface Student {
   id: number;
   email: string;
   studentDetail: StudentDetail;
+  courses: Course[]; // Courses the student is enrolled in
 }
 export interface StudentWithBookings {
   id: number;

@@ -1,6 +1,10 @@
 import { createReducer, on } from '@ngrx/store';
 import * as StudentActions from '../actions/student.actions';
-import { RetrieveBookingDto, StudentDetail, TimeSlot } from '../../models/studet-details.model';
+import {
+  RetrieveBookingDto,
+  StudentDetail,
+  TimeSlot,
+} from '../../models/studet-details.model';
 import { Course } from '../../../tutor/models/course.model';
 import { TutorDetail } from '../../../tutor/models/tutor-detail.model';
 
@@ -9,10 +13,11 @@ export interface StudentState {
   bookings: RetrieveBookingDto[];
   loading: boolean;
   error: any;
-  isLoggedIn: boolean
-  loggedInUser: StudentDetail| undefined | TutorDetail,
-  courses: Course[],
-  timeSlots: TimeSlot[]
+  isLoggedIn: boolean;
+  loggedInUser: StudentDetail | undefined | TutorDetail;
+  courses: Course[];
+  timeSlots: TimeSlot[];
+  myCourses: Course[];
 }
 
 export const initialState: StudentState = {
@@ -20,61 +25,80 @@ export const initialState: StudentState = {
   bookings: [],
   loading: false,
   error: null,
-  loggedInUser : undefined,
-  isLoggedIn : false,
+  loggedInUser: undefined,
+  isLoggedIn: false,
   courses: [],
-  timeSlots: []
+  timeSlots: [],
+  myCourses: [],
 };
 
 export const studentReducer = createReducer(
   initialState,
 
-  on(StudentActions.registerStudent, StudentActions.loadStudentProfile, StudentActions.loadBookings, StudentActions.scheduleBooking, StudentActions.cancelBooking, (state) => ({
-    ...state,
-    loading: true,
-    error: null
-  })),
+  on(
+    StudentActions.registerStudent,
+    StudentActions.loadStudentProfile,
+    StudentActions.loadBookings,
+    StudentActions.scheduleBooking,
+    StudentActions.cancelBooking,
+    (state) => ({
+      ...state,
+      loading: true,
+      error: null,
+    })
+  ),
 
-  on(StudentActions.registerStudentSuccess, StudentActions.scheduleBookingSuccess, (state) => ({
-    ...state,
-    loading: false
-  })),
+  on(
+    StudentActions.registerStudentSuccess,
+    StudentActions.scheduleBookingSuccess,
+    (state) => ({
+      ...state,
+      loading: false,
+    })
+  ),
 
-  on(StudentActions.registerStudentFailure, StudentActions.loadStudentProfileFailure, StudentActions.loadBookingsFailure, StudentActions.scheduleBookingFailure, StudentActions.cancelBookingFailure, (state, { error }) => ({
-    ...state,
-    loading: false,
-    error
-  })),
+  on(
+    StudentActions.registerStudentFailure,
+    StudentActions.loadStudentProfileFailure,
+    StudentActions.loadBookingsFailure,
+    StudentActions.scheduleBookingFailure,
+    StudentActions.cancelBookingFailure,
+    (state, { error }) => ({
+      ...state,
+      loading: false,
+      error,
+    })
+  ),
 
   on(StudentActions.loadStudentProfileSuccess, (state, { profile }) => ({
     ...state,
     profile,
-    loading: false
+    loading: false,
   })),
 
   on(StudentActions.loadBookingsSuccess, (state, { bookings }) => ({
     ...state,
     bookings,
-    loading: false
+    loading: false,
   })),
 
   on(StudentActions.cancelBookingSuccess, (state, { bookingId }) => ({
     ...state,
-    bookings: state.bookings.filter(b => b.id !== bookingId),
-    loading: false
+    bookings: state.bookings.filter((b) => b.id !== bookingId),
+    loading: false,
   })),
 
-  on(StudentActions.loginStudent, state => ({
+  on(StudentActions.loginStudent, (state) => ({
     ...state,
     loading: true,
     error: null,
   })),
   on(StudentActions.loginStudentSuccess, (state, { userDetails }) => ({
     ...state,
-    
+
     loading: false,
     isLoggedIn: true,
-    loggedInUser: userDetails
+    loggedInUser: userDetails,
   })),
   on(StudentActions.loginStudentFailure, (state, { error }) => ({
     ...state,
@@ -82,7 +106,7 @@ export const studentReducer = createReducer(
     loading: false,
   })),
 
-   on(StudentActions.loadCourses, state => ({ ...state, loading: true })),
+  on(StudentActions.loadCourses, (state) => ({ ...state, loading: true })),
   on(StudentActions.loadCoursesSuccess, (state, { courses }) => ({
     ...state,
     courses: courses,
@@ -94,7 +118,7 @@ export const studentReducer = createReducer(
     loading: false,
     error,
   })),
-   on(StudentActions.loadTimeSlots, state => ({ ...state, loading: true })),
+  on(StudentActions.loadTimeSlots, (state) => ({ ...state, loading: true })),
   on(StudentActions.loadTimeSlotsSuccess, (state, { timeSlots }) => ({
     ...state,
     timeSlots,
@@ -103,6 +127,18 @@ export const studentReducer = createReducer(
     error: null,
   })),
   on(StudentActions.loadTimeSlotsFailure, (state, { error }) => ({
+    ...state,
+    loading: false,
+    error,
+  })),
+  on(StudentActions.loadMyCourses, (state) => ({ ...state, loading: true })),
+  on(StudentActions.loadMyCoursesSuccess, (state, { courses }) => ({
+    ...state,
+    myCourses: courses,
+    loading: false,
+    error: null,
+  })),
+  on(StudentActions.loadMyCoursesFailure, (state, { error }) => ({
     ...state,
     loading: false,
     error,

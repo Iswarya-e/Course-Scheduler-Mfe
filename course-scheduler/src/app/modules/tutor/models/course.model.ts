@@ -1,5 +1,6 @@
 export interface Course {
-  id?: number;          // optional, assigned by backend
+  id: number;          // optional, assigned by backend
   title: string;
   description?: string;
+  enrolledAt?: Date;
 }

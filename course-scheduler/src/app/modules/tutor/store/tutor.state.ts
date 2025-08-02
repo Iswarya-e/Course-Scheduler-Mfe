@@ -44,3 +44,9 @@ export const selectBookings = createSelector(
   selectTutorDetailState,
   (state) => state.bookings
 );
+
+
+export const selectTimeSlots = createSelector(
+  selectTutorDetailState,
+  (state) => state.timeSlots
+);

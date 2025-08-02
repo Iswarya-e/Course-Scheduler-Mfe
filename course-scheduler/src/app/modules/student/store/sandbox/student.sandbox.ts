@@ -2,7 +2,13 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import * as StudentActions from '../actions/student.actions';
 import * as StudentSelectors from '../student.state';
-import { BookingDto, LoginDto, RegisterStudentDto, StudentDetail, TimeSlot } from '../../models/studet-details.model';
+import {
+  BookingDto,
+  LoginDto,
+  RegisterStudentDto,
+  StudentDetail,
+  TimeSlot,
+} from '../../models/studet-details.model';
 import { Observable } from 'rxjs';
 import { Course } from '../../../tutor/models/course.model';
 import { TutorDetail } from '../../../tutor/models/tutor-detail.model';
@@ -13,10 +19,20 @@ export class StudentSandbox {
   bookings$ = this.store.select(StudentSelectors.selectStudentBookings);
   loading$ = this.store.select(StudentSelectors.selectStudentLoading);
   error$ = this.store.select(StudentSelectors.selectStudentError);
-  user$: Observable<StudentDetail | undefined | TutorDetail> = this.store.select(StudentSelectors.selectLoggedInuser);
-  isLoggedIn$: Observable<boolean> = this.store.select(StudentSelectors.selectIsLoggedIn);
-  courses$: Observable<Course[]> = this.store.select(StudentSelectors.selectCourses);
-  timeSlots$: Observable<TimeSlot[]> = this.store.select(StudentSelectors.selectTimeSlots);
+  user$: Observable<StudentDetail | undefined | TutorDetail> =
+    this.store.select(StudentSelectors.selectLoggedInuser);
+  isLoggedIn$: Observable<boolean> = this.store.select(
+    StudentSelectors.selectIsLoggedIn
+  );
+  courses$: Observable<Course[]> = this.store.select(
+    StudentSelectors.selectCourses
+  );
+  myCourses$: Observable<Course[]> = this.store.select(
+    StudentSelectors.selectMyCourses
+  );
+  timeSlots$: Observable<TimeSlot[]> = this.store.select(
+    StudentSelectors.selectTimeSlots
+  );
   constructor(private store: Store) {}
 
   registerStudent(data: RegisterStudentDto) {
@@ -47,5 +63,8 @@ export class StudentSandbox {
 
   loadTimeSlots() {
     this.store.dispatch(StudentActions.loadTimeSlots());
+  }
+  loadMyCourses() {
+    this.store.dispatch(StudentActions.loadMyCourses());
   }
 }

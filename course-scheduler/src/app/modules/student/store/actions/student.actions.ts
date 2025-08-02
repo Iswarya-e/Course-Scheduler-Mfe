@@ -88,6 +88,20 @@ export const loginStudentFailure = createAction(
 );
 
 
+export const loadMyCourses = createAction(
+  '[Student] Load My Courses',
+);
+
+export const loadMyCoursesSuccess = createAction(
+  '[Student] Login My Courses Success',
+  props<{ courses: Course[] }>()
+);
+
+export const loadMyCoursesFailure = createAction(
+  '[Student] Login My Courses Failure',
+  props<{ error: any }>()
+);
+
 export const loadCourses = createAction('[Course] Load Courses');
 export const loadCoursesSuccess = createAction('[Course] Load Courses Success', props<{ courses: Course[] }>());
 export const loadCoursesFailure = createAction('[Course] Load Courses Failure', props<{ error: any }>());

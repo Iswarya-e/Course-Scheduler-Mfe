@@ -1,0 +1,28 @@
+<div class="card shadow-sm p-4">
+  <h5 class="mb-3 text-primary">Enrolled Courses</h5>
+
+  <div *ngIf="enrolledCourses.length > 0; else noCourses">
+    <div class="table-responsive">
+      <table class="table table-bordered table-hover">
+        <thead class="table-light">
+          <tr>
+            <th scope="col">S.No</th>
+            <th scope="col">Course Name</th>
+            <th scope="col">Enrolled Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let course of enrolledCourses; index as i">
+            <td>{{ i + 1 }}</td>
+            <td>{{ course.title }}</td>
+            <td>{{ course.enrolledAt | date: 'mediumDate' }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <ng-template #noCourses>
+    <div class="alert alert-info">You are not enrolled in any courses.</div>
+  </ng-template>
+</div>

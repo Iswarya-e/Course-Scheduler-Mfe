@@ -23,7 +23,7 @@ export class CreateBookingComponent implements OnInit {
       timeSlotId: [null, Validators.required],
     });
 
-    this.courses$ = this.studentSandbox.courses$;
+    this.courses$ = this.studentSandbox.myCourses$;
     this.timeSlots$ = this.studentSandbox.timeSlots$;
   }
 
@@ -31,7 +31,7 @@ export class CreateBookingComponent implements OnInit {
       this.studentSandbox.user$.subscribe(data=>{
         this.studentId = data?.id ?? 0;
       });
-    this.studentSandbox.loadCourses();
+    this.studentSandbox.loadMyCourses();
     this.studentSandbox.loadTimeSlots();
   }
 

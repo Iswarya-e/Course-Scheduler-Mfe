@@ -41,3 +41,8 @@ export const selectTimeSlots = createSelector(
   selectStudentState,
   (state) => state.timeSlots
 );
+
+export const selectMyCourses = createSelector(
+  selectStudentState,
+  (state) => state.myCourses
+);

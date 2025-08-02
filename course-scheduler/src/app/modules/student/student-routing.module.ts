@@ -7,6 +7,7 @@ import { ViewStudentBookingComponent } from './components/view-student-booking/v
 import { StudentDashboardComponent } from './pages/student-dashboard/student-dashboard.component';
 import { AuthGuard } from '../core/guards/auth.guard';
 import { StudentGuard } from '../core/guards/student-guard.guard';
+import { EnrolledCoursesComponent } from './components/enrolled-courses/enrolled-courses.component';
 
 const routes: Routes = [
   { path: 'register', component: StudentRegistrationComponent },
@@ -20,13 +21,13 @@ const routes: Routes = [
       { path: '', redirectTo: 'create-booking', pathMatch: 'full' },
       { path: 'create-booking', component: CreateBookingComponent },
       { path: 'view-student-bookings', component: ViewStudentBookingComponent },
+      { path: 'enrolled-courses', component: EnrolledCoursesComponent },
+
       { path: '**', redirectTo: 'create-booking' },
 
       // Add more child pages here like profile, etc.
     ]
   },
-
-  { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
 ];
 
 @NgModule({

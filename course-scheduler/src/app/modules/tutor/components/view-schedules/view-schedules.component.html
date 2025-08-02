@@ -1,81 +1,79 @@
-<div *ngIf="loading$ | async" class="text-center my-5">
-  <div class="spinner-border text-primary" role="status" style="width: 4rem; height: 4rem;">
-    <span class="visually-hidden">Loading schedules...</span>
-  </div>
-</div>
+<table class="table table-bordered table-hover align-middle">
+  <thead class="table-light">
+    <tr>
+      <th>S.No</th>
+      <th>Student Name</th>
+      <th>Course Title</th>
+      <th>Date</th>
+      <th>Time</th>
+      <th>Grade</th>
+    </tr>
+    <tr>
+      <th></th> <!-- empty for S.No -->
+      <th>
+        <input
+          type="text"
+          class="form-control form-control-sm"
+          placeholder="Search name"
+          [(ngModel)]="filters.studentName"
+          (ngModelChange)="applyFilter()"
+        />
+      </th>
+      <th>
+        <input
+          type="text"
+          class="form-control form-control-sm"
+          placeholder="Search title"
+          [(ngModel)]="filters.courseTitle"
+          (ngModelChange)="applyFilter()"
+        />
+      </th>
+      <th>
+        <input
+          type="text"
+          class="form-control form-control-sm"
+          placeholder="Search date"
+          [(ngModel)]="filters.date"
+          (ngModelChange)="applyFilter()"
+        />
+      </th>
+      <th>
+        <select
+          class="form-select form-select-sm"
+          [(ngModel)]="filters.time"
+          (ngModelChange)="applyFilter()"
+        >
+          <option value="">All</option>
+          <option *ngFor="let time of timeSlots" [value]="time">{{ time }}</option>
+        </select>
+      </th>
+      <th>
+        <select
+          class="form-select form-select-sm"
+          [(ngModel)]="filters.grade"
+          (ngModelChange)="applyFilter()"
+        >
+          <option value="">All</option>
+          <option *ngFor="let grade of grades" [value]="grade">{{ grade }}</option>
+        </select>
+      </th>
+    </tr>
+  </thead>
 
-<div *ngIf="error$ | async as error" class="alert alert-danger my-4" role="alert">
-  <i class="bi bi-exclamation-triangle-fill"></i>
-  <strong>Error:</strong> {{ error.message || error }}
-</div>
+  <tbody>
+    <tr *ngIf="filteredBookings.length === 0">
+      <td colspan="6" class="text-center text-muted py-4">
+        No matching records found.
+      </td>
+    </tr>
 
-<ul *ngIf="(bookings$ | async)?.length; else noSchedules" class="list-group">
-  <li *ngFor="let booking of bookings$ | async" class="list-group-item mb-4 shadow-sm rounded p-4">
-    
-    <div class="d-flex justify-content-between align-items-center mb-3">
-      <h5 class="mb-0 text-primary">{{ booking.course?.title }}</h5>
-      <!-- Placeholder for action buttons -->
-      <div>
-        <!-- Example button:
-        <button class="btn btn-outline-danger btn-sm me-2" (click)="cancelBooking(booking.id)">Cancel</button>
-        -->
-      </div>
-    </div>
-
-    <div class="row mb-3">
-      <div class="col-md-4">
-        <i class="bi bi-calendar-event-fill text-secondary me-2"></i>
-        <strong>Date:</strong> {{ booking.date | date:'fullDate' }}
-      </div>
-      <div class="col-md-4">
-        <i class="bi bi-clock-fill text-secondary me-2"></i>
-        <strong>Time:</strong> {{ booking.timeSlot?.startTime }} - {{ booking.timeSlot?.endTime }}
-      </div>
-    </div>
-
-    <hr />
-
-    <h6 class="text-secondary mb-3">Student Details</h6>
-    <div class="row g-2">
-      <div class="col-md-6">
-        <i class="bi bi-person-fill text-secondary me-1"></i>
-        <strong>Name:</strong> {{ booking.student?.studentDetail?.firstName }} {{ booking.student?.studentDetail?.lastName }}
-      </div>
-      <div class="col-md-6">
-        <i class="bi bi-envelope-fill text-secondary me-1"></i>
-        <strong>Email:</strong> {{ booking.student?.email }}
-      </div>
-      <div class="col-md-6">
-        <i class="bi bi-mortarboard-fill text-secondary me-1"></i>
-        <strong>Grade:</strong> {{ booking.student?.studentDetail?.grade }}
-      </div>
-      <div class="col-md-6">
-        <i class="bi bi-telephone-fill text-secondary me-1"></i>
-        <strong>Contact No:</strong> {{ booking.student?.studentDetail?.contactNo }}
-      </div>
-      <div class="col-md-12">
-        <i class="bi bi-geo-alt-fill text-secondary me-1"></i>
-        <strong>Address:</strong> {{ booking.student?.studentDetail?.address }}
-      </div>
-      <div class="col-md-4">
-        <i class="bi bi-gender-ambiguous text-secondary me-1"></i>
-        <strong>Gender:</strong> {{ booking.student?.studentDetail?.gender }}
-      </div>
-      <div class="col-md-4">
-        <i class="bi bi-calendar-fill text-secondary me-1"></i>
-        <strong>DOB:</strong> {{ booking.student?.studentDetail?.dob | date:'mediumDate' }}
-      </div>
-      <div class="col-md-4">
-        <i class="bi bi-building text-secondary me-1"></i>
-        <strong>School:</strong> {{ booking.student?.studentDetail?.schoolName }}
-      </div>
-    </div>
-  </li>
-</ul>
-
-<ng-template #noSchedules>
-  <div class="alert alert-info text-center my-5">
-    <i class="bi bi-info-circle-fill"></i>
-    No schedules found.
-  </div>
-</ng-template>
+    <tr *ngFor="let booking of filteredBookings; index as i" >
+      <td>{{ i + 1 }}</td>
+      <td>{{ booking.student?.studentDetail?.firstName }} {{ booking.student?.studentDetail?.lastName }}</td>
+      <td>{{ booking.course?.title }}</td>
+      <td>{{ booking.date | date:'dd-MM-yyyy' }}</td>
+      <td>{{ booking.timeSlot?.startTimeString }}</td>
+      <td>{{ booking.student?.studentDetail?.grade }}</td>
+    </tr>
+  </tbody>
+</table>

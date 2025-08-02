@@ -6,6 +6,7 @@ import * as TutorDetailActions from '../actions/tutor.actions';
 import { TutorApiService } from '../../services/tutor-api.service';
 import { LoginTutorDto } from '../../models/tutor-login-dto.model';
 import { ActivatedRoute, Router } from '@angular/router';
+import { TutorSandbox } from '../sandbox/tutor.sandbox';
 
 @Injectable()
 export class TutorDetailEffects {
@@ -155,10 +156,53 @@ export class TutorDetailEffects {
     { dispatch: false }
   );
 
+  loadTimeSlots$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(TutorDetailActions.loadTimeSlots),
+      switchMap(() =>
+        this.tutorApiService.getTimeSlots().pipe(
+          map((timeSlots) =>
+            TutorDetailActions.loadTimeSlotsSuccess({ timeSlots })
+          ),
+          catchError((error) =>
+            of(TutorDetailActions.loadTimeSlotsFailure({ error }))
+          )
+        )
+      )
+    )
+  );
+
+  updateStudentCourses$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(TutorDetailActions.updateStudentCourses),
+      mergeMap(({ studentId, courses }) =>
+        this.tutorApiService.updateStudentCourses(studentId, courses).pipe(
+          map(() =>
+            TutorDetailActions.updateStudentCoursesSuccess({ studentId, courses })
+          ),
+          catchError((error) =>
+            of(TutorDetailActions.updateStudentCoursesFailure({ error }))
+          )
+        )
+      )
+    )
+  );
+
+  loadStudentsAfterCourseUpdates$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(TutorDetailActions.updateStudentCoursesSuccess),
+        tap(() => {
+          this.sandbox.loadAllStudents();
+        })
+      ),
+    { dispatch: false }
+  );
   constructor(
     private actions$: Actions,
     private tutorApiService: TutorApiService,
     private router: Router,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private sandbox: TutorSandbox
   ) {}
 }

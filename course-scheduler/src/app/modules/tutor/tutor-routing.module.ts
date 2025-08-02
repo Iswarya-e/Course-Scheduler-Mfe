@@ -35,8 +35,6 @@ const routes: Routes = [
     ],
 
   },
-  { path: 'dashboard',component: TutorDashboardComponent},
-
 ];
 @NgModule({
   imports: [RouterModule.forChild(routes)],

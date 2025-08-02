@@ -16,7 +16,7 @@
         <div class="card-body">
           <h5 class="card-title text-primary">{{ booking.courseTitle }}</h5>
           <p class="card-text mb-1"><strong>Date:</strong> {{ booking.date | date:'mediumDate' }}</p>
-          <p class="card-text"><strong>Time Slot:</strong> {{ booking.startTime }} - {{ booking.endTime }}</p>
+          <p class="card-text"><strong>Time Slot:</strong> {{ booking.startTimeString }} </p>
           <button class="btn btn-danger btn-sm" (click)="cancelBooking(booking.id)">Cancel</button>
         </div>
       </div>

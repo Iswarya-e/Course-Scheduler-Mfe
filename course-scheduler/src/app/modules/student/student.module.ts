@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { AsyncPipe, CommonModule, DatePipe } from '@angular/common';
 
 import { StudentRoutingModule } from './student-routing.module';
-import { StudentRegistrationComponent } from './components/student-registration/student-registration.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
 import { studentReducer } from './store/reducers/student.reducer';
@@ -13,10 +12,12 @@ import { CreateBookingComponent } from './components/create-booking/create-booki
 import { ViewStudentBookingComponent } from './components/view-student-booking/view-student-booking.component';
 import { StudentDashboardComponent } from './pages/student-dashboard/student-dashboard.component';
 import { SharedModule } from '../../shared/shared.module';
+import { StudentRegistrationComponent } from './components/student-registration/student-registration.component';
+import { EnrolledCoursesComponent } from './components/enrolled-courses/enrolled-courses.component';
 
 
 @NgModule({
-  declarations: [StudentRegistrationComponent,StudentLoginComponent, CreateBookingComponent, ViewStudentBookingComponent, StudentDashboardComponent
+  declarations: [StudentRegistrationComponent,StudentLoginComponent, CreateBookingComponent, ViewStudentBookingComponent, StudentDashboardComponent, EnrolledCoursesComponent
   ],
   imports: [
     CommonModule,

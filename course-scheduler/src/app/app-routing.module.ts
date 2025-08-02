@@ -1,7 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { StudentGuard } from './modules/core/guards/student-guard.guard';
-import { TutorGuard } from './modules/core/guards/tutor-guard.guard';
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
 

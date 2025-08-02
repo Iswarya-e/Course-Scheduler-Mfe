@@ -15,6 +15,7 @@ import { StudentModule } from './modules/student/student.module';
 import { TutorModule } from './modules/tutor/tutor.module';
 import { HomeComponent } from './modules/home/pages/home/home.component';
 import { SharedModule } from './shared/shared.module';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { SharedModule } from './shared/shared.module';
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
       multi: true
-    }
+    },
+    provideAnimationsAsync()
   ],
   bootstrap: [AppComponent]
 })

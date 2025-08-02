@@ -125,6 +125,20 @@ export class StudentEffects {
       )
     )
   );
+  loadMyCourses$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(StudentActions.loadMyCourses),
+      switchMap(() =>
+        this.studentService.getEnrolledCourses().pipe(
+          map((courses) => StudentActions.loadMyCoursesSuccess({ courses })),
+          catchError((error) =>
+            of(StudentActions.loadMyCoursesFailure({ error }))
+          )
+        )
+      )
+    )
+  );
+
   loadTimeSlots$ = createEffect(() =>
     this.actions$.pipe(
       ofType(StudentActions.loadTimeSlots),

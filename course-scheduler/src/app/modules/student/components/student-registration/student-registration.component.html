@@ -96,20 +96,42 @@
           </div>
         </div>
 
-        <div class="col-md-12">
-          <label for="address" class="form-label fw-semibold">Address</label>
-          <input
-            type="text"
-            id="address"
-            formControlName="address"
-            class="form-control rounded-pill"
-            placeholder="Enter address"
-            required
-          />
-          <div class="text-danger small mt-1" *ngIf="registrationForm.get('address')?.touched && registrationForm.get('address')?.invalid">
-            Address is required.
+       <div class="mb-3">
+      <label class="form-label fw-semibold">Courses (Optional)</label>
+
+          <div class="dropdown">
+            <button
+              class="form-control text-start dropdown-toggle"
+              type="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+            {{getSelectedCourseTitles() || 'Select Courses'}}
+            </button>
+
+            <!-- Dropdown menu with checkboxes -->
+            <ul class="dropdown-menu w-100 p-2" style="max-height: 200px; overflow-y: auto;">
+              <li *ngFor="let course of courses">
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    [id]="'course-' + course.id"
+                    [value]="course.id"
+                    (change)="onCourseCheckboxChange($event)"
+                    [checked]="isCourseSelected(course.id)"
+                  />
+                  <label class="form-check-label" [for]="'course-' + course.id">
+                    {{ course.title }}
+                  </label>
+                </div>
+              </li>
+            </ul>
           </div>
         </div>
+
+
+
 
         <div class="col-md-6">
           <label for="dateOfBirth" class="form-label fw-semibold">Date of Birth</label>
@@ -127,14 +149,15 @@
 
         <div class="col-md-6">
           <label for="grade" class="form-label fw-semibold">Grade</label>
-          <input
-            type="text"
+          <select
             id="grade"
             formControlName="grade"
-            class="form-control rounded-pill"
-            placeholder="Enter grade"
+            class="form-select rounded-pill"
             required
-          />
+          >
+            <option value="" disabled selected>Select grade</option>
+            <option *ngFor="let grade of gradeOptions" [value]="grade">{{ grade }}</option>
+          </select>
           <div class="text-danger small mt-1" *ngIf="registrationForm.get('grade')?.touched && registrationForm.get('grade')?.invalid">
             Grade is required.
           </div>

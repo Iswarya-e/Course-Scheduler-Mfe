@@ -1,19 +1,24 @@
 import { createReducer, on } from '@ngrx/store';
 import { TutorDetail } from '../../models/tutor-detail.model';
-import * as TutorDetailActions from '../actions/tutor.actions'
+import * as TutorDetailActions from '../actions/tutor.actions';
 import { Course } from '../../models/course.model';
-import { BookingDetail, Student, StudentDetail } from '../../../student/models/studet-details.model';
+import {
+  BookingDetail,
+  Student,
+  StudentDetail,
+  TimeSlot,
+} from '../../../student/models/studet-details.model';
 export interface TutorDetailState {
   tutors: TutorDetail[];
   loading: boolean;
   error: string | null;
   token: string | null;
   loggedInUser: TutorDetail | StudentDetail | undefined;
-  isLoggedIn : boolean
+  isLoggedIn: boolean;
   courses: Course[];
-  students: Student[],
-  bookings: BookingDetail[],
-
+  students: Student[];
+  bookings: BookingDetail[];
+  timeSlots: TimeSlot[];
 }
 
 export const initialTutorDetailState: TutorDetailState = {
@@ -25,7 +30,8 @@ export const initialTutorDetailState: TutorDetailState = {
   loggedInUser: undefined,
   courses: [],
   students: [],
-  bookings: []
+  bookings: [],
+  timeSlots: [],
 };
 
 export const tutorDetailReducer = createReducer(
@@ -124,7 +130,7 @@ export const tutorDetailReducer = createReducer(
   on(TutorDetailActions.createCourse, (state) => ({
     ...state,
     loading: true,
-    error: null
+    error: null,
   })),
 
   on(TutorDetailActions.createCourseSuccess, (state) => ({
@@ -135,16 +141,23 @@ export const tutorDetailReducer = createReducer(
   on(TutorDetailActions.createCourseFailure, (state, { error }) => ({
     ...state,
     loading: false,
-    error
+    error,
   })),
-  on(TutorDetailActions.loadCourses, state => ({ ...state, loading: true, error: null })),
-  on(TutorDetailActions.loadCoursesSuccess, 
-    (state, { courses }) => ({
-       ...state, courses: courses, loading: false 
-      })),
-  on(TutorDetailActions.loadCoursesFailure, 
-    (state, { error }) => 
-      ({ ...state, error, loading: false })),
+  on(TutorDetailActions.loadCourses, (state) => ({
+    ...state,
+    loading: true,
+    error: null,
+  })),
+  on(TutorDetailActions.loadCoursesSuccess, (state, { courses }) => ({
+    ...state,
+    courses: courses,
+    loading: false,
+  })),
+  on(TutorDetailActions.loadCoursesFailure, (state, { error }) => ({
+    ...state,
+    error,
+    loading: false,
+  })),
 
   on(TutorDetailActions.loadAllStudents, (state) => ({
     ...state,
@@ -178,4 +191,38 @@ export const tutorDetailReducer = createReducer(
     error: error,
   })),
 
+  on(TutorDetailActions.loadTimeSlots, (state) => ({
+    ...state,
+    loading: true,
+  })),
+  on(TutorDetailActions.loadTimeSlotsSuccess, (state, { timeSlots }) => ({
+    ...state,
+    timeSlots,
+    loading: false,
+    timeSlot: timeSlots,
+    error: null,
+  })),
+  on(TutorDetailActions.loadTimeSlotsFailure, (state, { error }) => ({
+    ...state,
+    loading: false,
+    error,
+  })),
+
+  on(TutorDetailActions.updateStudentCourses, (state) => ({
+    ...state,
+    loading: true,
+    error: null,
+  })),
+  on(
+    TutorDetailActions.updateStudentCoursesSuccess,
+    (state, { studentId, courses }) => ({
+      ...state,
+      loading: false,
+    })
+  ),
+  on(TutorDetailActions.updateStudentCoursesFailure, (state, { error }) => ({
+    ...state,
+    loading: false,
+    error,
+  }))
 );
