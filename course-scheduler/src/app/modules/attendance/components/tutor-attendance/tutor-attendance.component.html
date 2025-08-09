@@ -1,0 +1,56 @@
+<div
+  class="d-flex flex-column vh-100 justify-content-center align-items-center bg-light px-3"
+>
+  <div
+    class="attendance-card bg-white rounded-4 shadow-lg p-5 border"
+    style="max-width: 600px; width: 100%"
+  >
+    <div class="mb-4 text-center">
+      <h4 class="fw-bold text-primary">Tutor Attendance</h4>
+    </div>
+    <div class="mb-3 text-center text-secondary">
+      {{ currentTime | date : "fullDate" }} -
+      {{ currentTime | date : "mediumTime" }}
+    </div>
+    <form [formGroup]="attendanceForm" (ngSubmit)="markLogin()">
+      <!-- Tutor select -->
+      <div class="mb-3">
+        <label for="tutor" class="form-label">Tutor Name</label>
+        <select
+          id="tutor"
+          formControlName="userId"
+          class="form-select"
+          (change)="onTutorChange()"
+        >
+          <option [ngValue]="null">Select Tutor</option>
+          <option *ngFor="let tutor of tutors" [ngValue]="tutor.id">
+            {{ tutor.fullName }}
+          </option>
+        </select>
+      </div>
+
+      <!-- Buttons -->
+      <div class="d-flex justify-content-center gap-2">
+        <button
+          type="submit"
+          class="btn btn-primary"
+          [disabled]="!canLogin || attendanceForm.invalid"
+        >
+          Login
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary"
+          (click)="markLogout()"
+          [disabled]="!canLogout"
+        >
+          Logout
+        </button>
+      </div>
+    </form>
+
+    <!-- Messages -->
+    <div *ngIf="message" class="alert alert-success mt-3">{{ message }}</div>
+    <div *ngIf="error" class="alert alert-danger mt-3">{{ error }}</div>
+  </div>
+</div>

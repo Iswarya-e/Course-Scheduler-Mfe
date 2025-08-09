@@ -24,6 +24,7 @@ export class ViewSchedulesComponent implements OnInit {
     date: '',
     time: '',
     grade: '',
+    schoolName: ''
   };
 
   constructor(private tutorSandbox: TutorSandbox) {
@@ -51,13 +52,14 @@ export class ViewSchedulesComponent implements OnInit {
       const date = booking.date ? new Date(booking.date).toDateString().toLowerCase() : '';
       const time = `${booking.timeSlot?.startTimeString ?? ''}`.toLowerCase();
       const grade = booking.student?.studentDetail?.grade?.toLowerCase() ?? '';
-
+      const schoolName = booking.student?.studentDetail?.schoolName?.toLowerCase() ?? '';
       return (
         fullName.includes(this.filters.studentName.toLowerCase()) &&
         courseTitle.includes(this.filters.courseTitle.toLowerCase()) &&
         date.includes(this.filters.date.toLowerCase()) &&
         time.includes(this.filters.time.toLowerCase()) &&
-        grade.includes(this.filters.grade.toLowerCase())
+        grade.includes(this.filters.grade.toLowerCase()) &&
+        schoolName.includes(this.filters.schoolName.toLowerCase())
       );
     });
   }

@@ -8,6 +8,7 @@ import {
   StudentDetail,
   TimeSlot,
 } from '../../../student/models/studet-details.model';
+import { AttendanceRecord } from '../../models/attendance.model';
 export interface TutorDetailState {
   tutors: TutorDetail[];
   loading: boolean;
@@ -19,6 +20,7 @@ export interface TutorDetailState {
   students: Student[];
   bookings: BookingDetail[];
   timeSlots: TimeSlot[];
+  studentAttendance: AttendanceRecord[];
 }
 
 export const initialTutorDetailState: TutorDetailState = {
@@ -32,6 +34,7 @@ export const initialTutorDetailState: TutorDetailState = {
   students: [],
   bookings: [],
   timeSlots: [],
+  studentAttendance: [],
 };
 
 export const tutorDetailReducer = createReducer(
@@ -221,6 +224,22 @@ export const tutorDetailReducer = createReducer(
     })
   ),
   on(TutorDetailActions.updateStudentCoursesFailure, (state, { error }) => ({
+    ...state,
+    loading: false,
+    error,
+  })),
+  on(TutorDetailActions.loadAttendanceRecords, (state) => ({
+    ...state,
+    loading: true,
+    error: null,
+  })),
+  on(TutorDetailActions.loadAttendanceRecordsSuccess, (state, { records }) => ({
+    ...state,
+    studentAttendance: records,
+    loading: false,
+    error: null,
+  })),
+  on(TutorDetailActions.loadAttendanceRecordsFailure, (state, { error }) => ({
     ...state,
     loading: false,
     error,

@@ -51,21 +51,23 @@
           </div>
         </div>
 
-        <div class="col-md-6">
-          <label for="password" class="form-label fw-semibold">Password</label>
+       <div class="col-md-6">
+          <label for="password" class="form-label fw-semibold">Password </label>
           <input
             type="password"
             id="password"
             formControlName="password"
             class="form-control rounded-pill"
-            placeholder="Enter password"
+            placeholder="Password"
             required
           />
           <div class="text-danger small mt-1" *ngIf="registrationForm.get('password')?.touched && registrationForm.get('password')?.invalid">
-            Password is required.
+            <div *ngIf="registrationForm.get('password')?.errors?.['required']">Password is required.</div>
+            <div *ngIf="registrationForm.get('password')?.errors?.['minlength']">
+              Password must be at least 6 characters.
+            </div>
           </div>
         </div>
-
         <div class="col-md-6">
           <label for="schoolName" class="form-label fw-semibold">School Name</label>
           <input
@@ -83,16 +85,22 @@
 
         <div class="col-md-6">
           <label for="contactNo" class="form-label fw-semibold">Contact No</label>
-          <input
-            type="text"
-            id="contactNo"
-            formControlName="contactNo"
-            class="form-control rounded-pill"
-            placeholder="Enter 10-digit contact number"
-            required
-          />
-          <div class="text-danger small mt-1" *ngIf="registrationForm.get('contactNo')?.touched && registrationForm.get('contactNo')?.invalid">
-            Valid 10-digit contact number is required.
+          <div class="input-group">
+            <span class="input-group-text rounded-pill-start">+65</span>
+            <input
+              type="text"
+              id="contactNo"
+              formControlName="contactNo"
+              class="form-control rounded-pill-end"
+              placeholder="Enter 8-digit contact number"
+              maxlength="8"
+              pattern="[0-9]{8}"
+              required
+            />
+          </div>
+          <div class="text-danger small mt-1"
+              *ngIf="registrationForm.get('contactNo')?.touched && registrationForm.get('contactNo')?.invalid">
+            Valid contact number is required.
           </div>
         </div>
 

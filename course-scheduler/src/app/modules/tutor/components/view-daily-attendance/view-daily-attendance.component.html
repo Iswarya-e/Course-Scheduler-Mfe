@@ -1,0 +1,57 @@
+<div class="container py-4">
+  <h2 class="mb-4">Student Attendance Records</h2>
+
+  <div class="mb-3 row align-items-center">
+    <label for="filterDate" class="col-sm-2 col-form-label">Select Date:</label>
+    <div class="col-sm-4">
+      <input
+        type="date"
+        id="filterDate"
+        class="form-control"
+        [value]="selectedDate | date:'yyyy-MM-dd'"
+        (change)="onDateChange($event)"
+      />
+    </div>
+  </div>
+
+  <div *ngIf="loading" class="text-center my-4">
+    <div class="spinner-border text-primary" role="status"></div>
+    <div>Loading attendance records...</div>
+  </div>
+
+  <div *ngIf="error" class="alert alert-danger">
+    {{ error }}
+  </div>
+
+  <table *ngIf="!loading && !error && attendanceRecords.length > 0" class="table table-bordered table-hover">
+    <thead class="table-light">
+      <tr>
+        <th>S.No</th>
+        <th>Name</th>
+        <th>School</th>
+        <th>Grade</th>
+        <th>Course</th>
+        <th>In / Out Time</th>
+        <th>Total Time</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let record of attendanceRecords; let i = index">
+        <td>{{ i + 1 }}</td>
+        <td>{{ record.fullName }}</td>
+        <td>{{ record.schoolName }}</td>
+        <td>{{ record.grade }}</td>
+        <td>{{ record.courseTitle }}</td>
+        <td>
+        <div>{{ record.loginTime | date: 'hh:mm a' }} / {{ record.logoutTime ? (record.logoutTime | date: 'hh:mm a') : '-' }}</div>
+        </td>
+        <td>{{ record.loginTime | duration:record.logoutTime }}</td>
+
+      </tr>
+    </tbody>
+  </table>
+
+  <div *ngIf="!loading && !error && attendanceRecords.length === 0" class="text-center text-muted my-4">
+    No attendance records found for selected date.
+  </div>
+</div>

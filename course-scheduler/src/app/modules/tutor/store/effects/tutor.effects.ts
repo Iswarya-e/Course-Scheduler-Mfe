@@ -198,6 +198,20 @@ export class TutorDetailEffects {
       ),
     { dispatch: false }
   );
+
+  loadAttendanceRecords$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(TutorDetailActions.loadAttendanceRecords),
+      mergeMap(({ date }) =>
+        this.tutorApiService.getAttendanceRecords(date).pipe(
+          map(records => TutorDetailActions.loadAttendanceRecordsSuccess({ records })),
+          catchError(error =>
+            of(TutorDetailActions.loadAttendanceRecordsFailure({ error: error.message }))
+          )
+        )
+      )
+    )
+  );
   constructor(
     private actions$: Actions,
     private tutorApiService: TutorApiService,

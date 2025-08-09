@@ -3,13 +3,15 @@ import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { FormsModule } from '@angular/forms';
+import { DurationPipe } from './pipes/duration.pipe';
 
 
 
 @NgModule({
   declarations: [
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    DurationPipe
   ],
   imports: [
     CommonModule,
@@ -18,6 +20,7 @@ import { FormsModule } from '@angular/forms';
   exports:[
     HeaderComponent,
     FooterComponent,
+    DurationPipe
 
   ]
 })

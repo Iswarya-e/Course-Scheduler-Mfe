@@ -17,6 +17,10 @@ const routes: Routes = [
     path: 'tutor', 
     loadChildren: () => import('./modules/tutor/tutor.module').then(m => m.TutorModule) 
   },
+  {
+    path: 'attendance',
+    loadChildren: () =>import('./modules/attendance/attendance.module').then(m => m.AttendanceModule),
+  },
 
   { path: '**', redirectTo: 'home' }
 ];

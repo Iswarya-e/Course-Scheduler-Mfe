@@ -16,6 +16,7 @@ import {
   StudentDetail,
   TimeSlot,
 } from '../../../student/models/studet-details.model';
+import { AttendanceRecord } from '../../models/attendance.model';
 
 @Injectable({
   providedIn: 'root',
@@ -47,6 +48,8 @@ export class TutorSandbox {
   timeSlots$: Observable<TimeSlot[]> = this.store.select(
     fromTutorDetailSelectors.selectTimeSlots
   );
+  records$: Observable<AttendanceRecord[]> = this.store.select(fromTutorDetailSelectors.selectAttendanceRecords);
+
   constructor(private store: Store<{ tutorDetail: TutorDetailState }>) {}
 
   loadTutors(): void {
@@ -88,5 +91,8 @@ export class TutorSandbox {
   }
   updateStudentCourses(studentId: number, courses: any[]) {
     this.store.dispatch(TutorDetailActions.updateStudentCourses({ studentId, courses }));
+  }
+  loadAttendance(date?: Date) {
+    this.store.dispatch(TutorDetailActions.loadAttendanceRecords({ date }));
   }
 }

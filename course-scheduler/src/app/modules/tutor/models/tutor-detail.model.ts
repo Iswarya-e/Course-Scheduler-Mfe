@@ -8,7 +8,7 @@ export interface TutorDetail {
   contactNo?: string;
   qualification?: string;
   expertiseArea?: string;
-  bio?: string;
+  binricFino?: string;
   gender?: string;
   dob?: Date | null;
   address?: string;
@@ -21,7 +21,7 @@ export interface TutorRegistrationDto {
   contactNo?: string;
   qualification?: string;
   expertiseArea?: string;
-  bio?: string;
+  nricFin?: string;
   gender?: string;
   dob?: Date | null;
   address?: string;

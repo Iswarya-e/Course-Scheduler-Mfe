@@ -1,0 +1,100 @@
+<div
+  class="d-flex flex-column vh-100 justify-content-center align-items-center bg-light px-3"
+>
+  <div
+    class="attendance-card bg-white rounded-4 shadow-lg p-5 border"
+    style="max-width: 600px; width: 100%"
+  >
+    <h4 class="fw-bold text-primary text-center mb-4">Mark Attendance</h4>
+    <div class="mb-3 text-center text-secondary">
+      {{ currentTime | date : "fullDate" }} -
+      {{ currentTime | date : "mediumTime" }}
+    </div>
+    <form [formGroup]="attendanceForm" (ngSubmit)="markLogin()">
+      <!-- Student select -->
+      <div class="mb-3">
+        <label for="studentId" class="form-label">Select Student</label>
+        <select
+          id="studentId"
+          class="form-select"
+          formControlName="userId"
+          (change)="onStudentChange()"
+        >
+          <option [ngValue]="null">Select Student</option>
+          <option *ngFor="let student of students" [ngValue]="student.id">
+            {{ student.fullName }}
+          </option>
+        </select>
+      </div>
+
+      <!-- Grade label -->
+      <div class="mb-3">
+        <label class="form-label">Grade</label>
+        <input
+          type="text"
+          class="form-control"
+          [value]="selectedGrade"
+          readonly
+          tabindex="-1"
+          aria-readonly="true"
+        />
+      </div>
+
+      <!-- Courses dropdown -->
+      <div class="mb-3">
+        <label class="form-label">Course</label>
+
+        <!-- If logged in, show label -->
+        <ng-container *ngIf="selectedCourse; else selectCourse">
+          <input
+            type="text"
+            class="form-control"
+            [value]="selectedCourse.title"
+            readonly
+          />
+        </ng-container>
+
+        <!-- Else show dropdown to select -->
+        <ng-template #selectCourse>
+          <select
+            formControlName="courseId"
+            class="form-select"
+            [disabled]="attendanceForm.invalid"
+          >
+            <option [ngValue]="null">Select Course</option>
+            <option
+              *ngFor="let course of availableCourses"
+              [ngValue]="course.courseId"
+            >
+              {{ course.title }}
+            </option>
+          </select>
+        </ng-template>
+      </div>
+
+      <!-- Buttons -->
+      <div class="d-flex gap-3">
+        <button
+          type="submit"
+          class="btn btn-primary flex-grow-1"
+          [disabled]="!canLogin || attendanceForm.invalid"
+        >
+          Login
+        </button>
+
+        <button
+          type="button"
+          class="btn btn-primary flex-grow-1"
+          (click)="markLogout()"
+          [disabled]="!canLogout"
+        >
+          Logout
+        </button>
+      </div>
+
+      <!-- Feedback -->
+      <div *ngIf="message" class="alert alert-success mt-3">{{ message }}</div>
+      <div *ngIf="error" class="alert alert-danger mt-3">{{ error }}</div>
+    </form>
+  </div>
+</div>

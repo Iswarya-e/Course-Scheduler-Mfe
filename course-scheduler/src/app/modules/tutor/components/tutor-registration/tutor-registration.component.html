@@ -53,14 +53,24 @@
         </div>
 
         <div class="col-md-6">
-          <label for="contactNo" class="form-label fw-semibold">Contact Number</label>
-          <input
-            type="text"
-            id="contactNo"
-            formControlName="contactNo"
-            class="form-control rounded-pill"
-            placeholder="Contact Number"
-          />
+          <label for="contactNo" class="form-label fw-semibold">Contact No *</label>
+          <div class="input-group">
+            <span class="input-group-text rounded-pill-start">+65</span>
+            <input
+              type="text"
+              id="contactNo"
+              formControlName="contactNo"
+              class="form-control rounded-pill-end"
+              placeholder="Enter 8-digit contact number"
+              maxlength="8"
+              pattern="[0-9]{8}"
+              required
+            />
+          </div>
+          <div class="text-danger small mt-1"
+              *ngIf="tutorForm.get('contactNo')?.touched && tutorForm.get('contactNo')?.invalid">
+            Valid contact number is required.
+          </div>
         </div>
 
         <div class="col-md-6">
@@ -86,13 +96,13 @@
         </div>
 
         <div class="col-md-12">
-          <label for="bio" class="form-label fw-semibold">Bio</label>
+          <label for="address" class="form-label fw-semibold">Address</label>
           <textarea
-            id="bio"
-            formControlName="bio"
+            id="address"
+            formControlName="address"
             class="form-control rounded-3"
             rows="3"
-            placeholder="Short Bio"
+            placeholder="Short address"
           ></textarea>
         </div>
 
@@ -119,19 +129,25 @@
             class="form-control rounded-pill"
           />
         </div>
-
-        <div class="col-md-12">
-          <label for="address" class="form-label fw-semibold">Address</label>
+        <div class="col-md-6">
+          <label for="nricFin" class="form-label fw-semibold">NRIC / FIN *</label>
           <input
             type="text"
-            id="address"
-            formControlName="address"
-            class="form-control rounded-pill"
-            placeholder="Address"
+            id="nricFin"
+            formControlName="nricFin"
+            class="form-control rounded-pill text-uppercase"
+            placeholder="e.g., S1234567A"
+            maxlength="9"
+            pattern="^[STFG]\d{7}[A-Z]$"
+            required
           />
-        </div>
+          <div class="text-danger small mt-1"
+              *ngIf="tutorForm.get('nricFin')?.touched && tutorForm.get('nricFin')?.invalid">
+            Enter a valid NRIC / FIN (e.g., S1234567A).
+          </div>
+       </div>
 
-        <div class="col-md-12">
+        <div class="col-md-6">
           <label for="password" class="form-label fw-semibold">Password *</label>
           <input
             type="password"

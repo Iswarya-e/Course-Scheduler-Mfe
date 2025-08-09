@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { TutorDetail, TutorRegistrationDto } from '../models/tutor-detail.model';
@@ -6,6 +6,7 @@ import { LoginTutorDto } from '../models/tutor-login-dto.model';
 import { LoginResponse } from '../models/tutor-login-response';
 import { Course } from '../models/course.model';
 import { BookingDetail, Student, StudentDetail, TimeSlot } from '../../student/models/studet-details.model';
+import { AttendanceRecord } from '../models/attendance.model';
 
 @Injectable({
   providedIn: 'root'
@@ -64,5 +65,14 @@ export class TutorApiService {
 
   updateStudentCourses(studentId: number, courses: any[]): Observable<any> {
     return this.http.post(`${this.baseUrl}/${studentId}/courses`, { courses });
+  }
+
+   getAttendanceRecords(date?: Date): Observable<AttendanceRecord[]> {
+    let params = new HttpParams();
+    if (date) {
+      // Pass ISO string of date for backend query param
+      params = params.set('date', date.toISOString());
+    }
+    return this.http.get<AttendanceRecord[]>(`${this.baseUrl}/getStudentAttendance`, { params });
   }
 }

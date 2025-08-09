@@ -3,6 +3,7 @@ import { TutorDetail, TutorRegistrationDto } from '../../models/tutor-detail.mod
 import { LoginTutorDto } from '../../models/tutor-login-dto.model';
 import { Course } from '../../models/course.model';
 import { BookingDetail, Student, StudentDetail, TimeSlot } from '../../../student/models/studet-details.model';
+import { AttendanceRecord } from '../../models/attendance.model';
 
 export const loadTutors = createAction('[TutorDetail] Load Tutors');
 
@@ -141,4 +142,19 @@ export const updateStudentCoursesSuccess = createAction(
 export const updateStudentCoursesFailure = createAction(
   '[Students] Update Student Courses Failure',
   props<{ error: any }>()
+);
+
+export const loadAttendanceRecords = createAction(
+  '[Attendance] Load Attendance Records',
+  props<{ date?: Date }>()  // Date type here
+);
+
+export const loadAttendanceRecordsSuccess = createAction(
+  '[Attendance] Load Attendance Records Success',
+  props<{ records: AttendanceRecord[] }>()
+);
+
+export const loadAttendanceRecordsFailure = createAction(
+  '[Attendance] Load Attendance Records Failure',
+  props<{ error: string }>()
 );

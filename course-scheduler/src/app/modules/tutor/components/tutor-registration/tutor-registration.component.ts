@@ -20,10 +20,10 @@ tutorForm: FormGroup = new FormGroup({});
           firstName: ['', Validators.required],
           lastName: ['', Validators.required],
           email: ['', [Validators.required, Validators.email]],  // <-- added email with validator
-          contactNo: [''],
+          contactNo: ['', [Validators.required]],
           qualification: [''],
           expertiseArea: [''],
-          bio: [''],
+          nricFin: ['', Validators.required],
           gender: [''],
           dob: [''],
           address: [''],

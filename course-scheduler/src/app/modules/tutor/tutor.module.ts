@@ -16,6 +16,8 @@ import { EditCourseComponent } from './components/edit-course/edit-course.compon
 import { CreateCourseComponent } from './components/create-course/create-course.component';
 import { ViewCoursesComponent } from './components/view-courses/view-courses.component';
 import { SharedModule } from '../../shared/shared.module';
+import { ViewDailyAttendanceComponent } from './components/view-daily-attendance/view-daily-attendance.component';
+import { DurationPipe } from '../../shared/pipes/duration.pipe';
 @NgModule({
   declarations: [
     TutorRegistrationComponent,
@@ -25,7 +27,8 @@ import { SharedModule } from '../../shared/shared.module';
     TutorDashboardComponent,
     EditCourseComponent,
     CreateCourseComponent,
-    ViewCoursesComponent
+    ViewCoursesComponent,
+    ViewDailyAttendanceComponent
   ],
   imports: [
     CommonModule,

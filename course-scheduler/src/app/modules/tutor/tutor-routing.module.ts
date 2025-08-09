@@ -10,6 +10,7 @@ import { ViewStudentsComponent } from './components/view-students/view-students.
 import { ViewCoursesComponent } from './components/view-courses/view-courses.component';
 import { AuthGuard } from '../core/guards/auth.guard';
 import { TutorGuard } from '../core/guards/tutor-guard.guard';
+import { ViewDailyAttendanceComponent } from './components/view-daily-attendance/view-daily-attendance.component';
 
 const routes: Routes = [
   { path: 'register', component: TutorRegistrationComponent }, // ✅ public route
@@ -31,6 +32,7 @@ const routes: Routes = [
         path: 'students',
         component: ViewStudentsComponent,
       },
+      { path: 'view-daily-attendance', component: ViewDailyAttendanceComponent },
       { path: '', redirectTo: 'schedules', pathMatch: 'full' },
     ],
 

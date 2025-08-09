@@ -50,3 +50,10 @@ export const selectTimeSlots = createSelector(
   selectTutorDetailState,
   (state) => state.timeSlots
 );
+
+
+
+export const selectAttendanceRecords = createSelector(
+    selectTutorDetailState,
+  (state) => state.studentAttendance
+);
